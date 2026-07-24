@@ -1,0 +1,11 @@
+comtypes
+darkdetect
+icoextract
+pefile
+pillow
+pip
+psutil
+pycaw
+pystray
+pywin32
+six
