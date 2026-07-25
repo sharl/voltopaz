@@ -28,7 +28,7 @@ def get_info() -> list[Info]:
                 app_path = process.exe()
                 info.append(
                     Info(
-                        name=process.name().lower(),
+                        name=process.name(),
                         path=app_path,
                         icon=Image.open(IconExtractor(app_path).get_icon()),
                         volume=volume.GetMasterVolume(),
