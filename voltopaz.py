@@ -39,6 +39,7 @@ class TaskTray:
         self.set_icons(Image.open('icon.png'))
 
         self.app = Icon(name=APP_NAME, title=APP_NAME, icon=self.min_image)
+        self.app.title = f'{self.name}'
         self.app.menu = Menu(self.build_menu)
 
     def set_icons(self, image: Image) -> None:
@@ -78,6 +79,7 @@ class TaskTray:
     def set_target(self, _, item):
         self.name = item.text
         self.set_icons(self.apps[item.text].icon)
+        self.app.title = f'{self.name}'
         self.app.icon = self.min_image
 
     def com_worker(self):
@@ -114,9 +116,11 @@ class TaskTray:
     def doTask(self):
         if self.state:
             self.task_queue.put(self.min_vol / 100)
+            self.app.title = f'{self.name} {self.min_vol}'
             self.app.icon = self.min_image
         else:
             self.task_queue.put(self.max_vol / 100)
+            self.app.title = f'{self.name} {self.max_vol}'
             self.app.icon = self.max_image
 
         self.state = not self.state
