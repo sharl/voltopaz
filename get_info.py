@@ -15,6 +15,14 @@ class Info:
     volume: float
 
 
+def get_icon(app_path: str) -> Image:
+    try:
+        image = Image.open(IconExtractor(app_path).get_icon()).copy()
+    except Exception:
+        image = Image.new('RGB', (64, 64), (16, 200, 200))
+    return image
+
+
 def get_info() -> list[Info]:
     info = []
 
@@ -30,7 +38,7 @@ def get_info() -> list[Info]:
                     Info(
                         name=process.name(),
                         path=app_path,
-                        icon=Image.open(IconExtractor(app_path).get_icon()),
+                        icon=get_icon(app_path),
                         volume=volume.GetMasterVolume(),
                     )
                 )
